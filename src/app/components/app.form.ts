@@ -37,8 +37,15 @@ export class AppForm {
   ){}
 
   getCEP(cep) {
-    this.httpClient.get('https://viacep.com.br/ws/' + cep + '/json/').subscribe((res)=>{
+    const CEP = cep.split('.').join("").split('-').join("")
+    this.httpClient.get<any>(`https://viacep.com.br/ws/${CEP}/json`).subscribe((res)=>{
       console.log(res);
+      this.form.get('address').setValue(`${res['logradouro']} ${res['bairro']}`);
+      this.form.get('city').setValue(res['localidade']);
+      this.form.get('state').setValue(res['uf']);
+      this.form.get('country').setValue('Brasil');
+      this.form.get('phone').setValue(res['ddd']);
+      this.form.markAllAsTouched();
     });
   }
 
