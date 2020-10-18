@@ -1,0 +1,42 @@
+/* You can add global styles to this file, and also import other style files */
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    outline: none;
+    border: none;
+    box-sizing: border-box;
+    appearance: none;
+}
+
+html,
+body {
+    min-height: 100%;
+    height: 100%;
+}
+
+#general {
+    font-family: arial, sans-serif;
+    position: relative;
+    min-height: 100%;
+}
+
+main,
+picture {
+    display: block;
+}
+
+.middle {
+    max-width: 960px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+@media (max-width: 767px) {
+    .middle-special {
+        max-width: 100%;
+        padding: 0 15px;
+    }
+}
+
