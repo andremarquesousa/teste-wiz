@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-form',
@@ -11,27 +11,27 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class AppForm {
   title = 'form';
   hasCompanion = false;
-  form = new FormGroup({
-    firstName: new FormControl(''),
-    lastName: new FormControl(''),
-    cpf: new FormControl(''),
-    birthDate: new FormControl(''),
-    email: new FormControl(''),
-    companion: new FormControl(''),
-    companionFirstName: new FormControl(''),
-    companionLastName: new FormControl(''),
-    companionCpf: new FormControl(''),
-    companionBirthDate: new FormControl(''),
-    companionEmail: new FormControl(''),
-    cep: new FormControl(''),
-    address: new FormControl(''),
-    country: new FormControl(''),
-    state: new FormControl(''),
-    city: new FormControl(''),
-    phone: new FormControl('')
+  form = this.fb.group({
+    firstName: [''],
+    lastName: [''],
+    cpf: [''],
+    birthDate: [''],
+    email: ['', Validators.email],
+    companion: [''],
+    companionFirstName: [''],
+    companionLastName: [''],
+    companionCpf: [''],
+    companionBirthDate: [''],
+    companionEmail: ['', Validators.email],
+    cep: [''],
+    address: [''],
+    country: [''],
+    state: [''],
+    city: [''],
+    phone: ['']
   });
 
-  constructor(public httpClient: HttpClient){}
+  constructor(public httpClient: HttpClient, private fb: FormBuilder){}
 
   sendCepRequest(){
     this.httpClient.get('https://correiosapi.apphb.com/').subscribe((res)=>{

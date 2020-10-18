@@ -146,6 +146,10 @@ main {
 
         select {
             padding: 0 40px 0 10px;
+
+            &.default {
+                color: rgba(0, 0, 0, 0.6);
+            }
         }
 
         .select {

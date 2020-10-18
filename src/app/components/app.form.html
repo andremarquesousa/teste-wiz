@@ -72,14 +72,14 @@
                     </label>
         
                     <label class="select" [ngClass]="{'error': form.get('country').invalid && (form.get('country').dirty)}">
-                        <select formControlName="country">
+                        <select formControlName="country" [ngClass]="{'default': !form.get('country').dirty}">
                             <option value="" disabled selected>País</option>
                             <option value="Brasil">Brasil</option>
                         </select>
                     </label>
 
                     <label class="select" [ngClass]="{'error': form.get('state').invalid && (form.get('state').dirty)}">
-                        <select formControlName="state">
+                        <select formControlName="state" [ngClass]="{'default': !form.get('state').dirty}">
                             <option selected="" value="" disabled>Estado</option>
                             <option value="Acre">Acre</option>
                             <option value="Alagoas">Alagoas</option>
