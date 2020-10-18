@@ -18,14 +18,12 @@ export class AppForm {
     birthDate: new FormControl(''),
     email: new FormControl(''),
     companion: new FormControl(''),
-    address: new FormGroup({
-      cep: new FormControl(''),
-      address: new FormControl(''),
-      country: new FormControl(''),
-      state: new FormControl(''),
-      city: new FormControl(''),
-      phone: new FormControl(''),
-    })
+    cep: new FormControl(''),
+    address: new FormControl(''),
+    country: new FormControl(''),
+    state: new FormControl(''),
+    city: new FormControl(''),
+    phone: new FormControl('')
   });
 
   constructor(public httpClient: HttpClient){}

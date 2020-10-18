@@ -10,23 +10,23 @@
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
             <div class="left">
                 <fieldset>
-                    <label>
+                    <label [ngClass]="{'error': form.get('firstName').invalid && (form.get('firstName').dirty)}">
                         <input type="text" placeholder="Primeiro Nome" formControlName="firstName" required>
                     </label>
         
-                    <label>
+                    <label [ngClass]="{'error': form.get('lastName').invalid && (form.get('lastName').dirty)}">
                         <input type="text" placeholder="Último Nome" formControlName="lastName" required>
                     </label>
         
-                    <label>
-                        <input type="text" placeholder="CPF" formControlName="cpf" required>
+                    <label [ngClass]="{'error': form.get('cpf').invalid && (form.get('cpf').dirty)}">
+                        <input type="text" placeholder="CPF" formControlName="cpf" mask='000.000.000-00' required>
                     </label>
         
-                    <label>
-                        <input type="text" placeholder="Data de nascimento" formControlName="birthDate" required>
+                    <label [ngClass]="{'error': form.get('birthDate').invalid && (form.get('birthDate').dirty)}">
+                        <input type="text" placeholder="Data de nascimento" formControlName="birthDate" mask='00/00/0000' required>
                     </label>
         
-                    <label class="full">
+                    <label class="full" [ngClass]="{'error': form.get('email').invalid && (form.get('email').dirty)}">
                         <input type="email" placeholder="Email" formControlName="email" required>
                     </label>
                 </fieldset>
@@ -36,25 +36,27 @@
                     <span>Adicionar acompanhante</span>
                 </label>
 
-                <fieldset formGroupName="address">
-                    <label>
-                        <input type="text" placeholder="CEP" formControlName="cep" required>
+                <fieldset>
+                    <p>Dados da entrega</p>
+
+                    <label class="full" [ngClass]="{'error': form.get('cep').invalid && (form.get('cep').dirty)}">
+                        <input type="text" placeholder="CEP" formControlName="cep" mask='00.000-000' required>
                     </label>
         
-                    <label>
+                    <label class="full" [ngClass]="{'error': form.get('address').invalid && (form.get('address').dirty)}">
                         <input type="text" placeholder="Endereço" formControlName="address" required>
                     </label>
         
-                    <label class="select">
+                    <label class="select" [ngClass]="{'error': form.get('country').invalid && (form.get('country').dirty)}">
                         <select formControlName="country">
-                            <option value="">País</option>
-                            <option value="Brasil" selected>Brasil</option>
+                            <option value="" disabled selected>País</option>
+                            <option value="Brasil">Brasil</option>
                         </select>
                     </label>
 
-                    <label class="select">
+                    <label class="select" [ngClass]="{'error': form.get('state').invalid && (form.get('state').dirty)}">
                         <select formControlName="state">
-                            <option selected="" value="">Estado</option>
+                            <option selected="" value="" disabled>Estado</option>
                             <option value="Acre">Acre</option>
                             <option value="Alagoas">Alagoas</option>
                             <option value="Amapá">Amapá</option>
@@ -85,16 +87,16 @@
                         </select>
                     </label>
 
-                    <label>
+                    <label class="full" [ngClass]="{'error': form.get('city').invalid && (form.get('city').dirty)}">
                         <input type="text" placeholder="Cidade" formControlName="city" required>
                     </label>
         
-                    <label>
-                        <input type="text" placeholder="Telefone" formControlName="phone" required>
+                    <label class="full" [ngClass]="{'error': form.get('phone').invalid && (form.get('phone').dirty)}">
+                        <input type="text" placeholder="Telefone" formControlName="phone" mask='(00) 00000-0000' required>
                     </label>
                 </fieldset>
 
-                <button type="submit" [disabled]="!form.valid">Submit</button>
+                <button type="submit" [disabled]="!form.valid">Enviar</button>
             </div>
 
             <div class="right">
