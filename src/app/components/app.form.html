@@ -64,7 +64,7 @@
                     <p>Dados da entrega</p>
 
                     <label class="full" [ngClass]="{'error': form.get('cep').invalid && (form.get('cep').dirty)}">
-                        <input type="text" placeholder="CEP" formControlName="cep" mask='00.000-000' required>
+                        <input type="text" placeholder="CEP" formControlName="cep" mask='00.000-000' (keyup)="sendCepRequest($event)" required>
                     </label>
         
                     <label class="full" [ngClass]="{'error': form.get('address').invalid && (form.get('address').dirty)}">
