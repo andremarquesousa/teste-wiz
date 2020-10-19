@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
@@ -9,8 +9,6 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 
 export class AppForm {
-  title = 'form';
-  hasCompanion = false;
   form = this.fb.group({
     firstName: [''],
     lastName: [''],
@@ -30,6 +28,7 @@ export class AppForm {
     city: [''],
     phone: ['']
   });
+  mobile = (window.screen.width < 960) ? true : false;
 
   constructor (
     public httpClient: HttpClient,
@@ -39,7 +38,6 @@ export class AppForm {
   getCEP(cep) {
     const CEP = cep.split('.').join("").split('-').join("")
     this.httpClient.get<any>(`https://viacep.com.br/ws/${CEP}/json`).subscribe((res)=>{
-      console.log(res);
       this.form.get('address').setValue(`${res['logradouro']} ${res['bairro']}`);
       this.form.get('city').setValue(res['localidade']);
       this.form.get('state').setValue(res['uf']);
@@ -54,8 +52,16 @@ export class AppForm {
       this.getCEP(e.target.value)
     }
   }
-
+t
   onSubmit() {
-    console.warn(this.form.value);
+    let headers = new HttpHeaders()
+      .set('Content-Type', 'application/json')
+      .set('Authorization', 'Basic #ASDFGW#ERWQERTRYT#%$%$@#$%==');
+
+    const options = {headers: headers};
+
+    this.httpClient.post('http://localhost/reserva', this.form.value ,options).subscribe((res)=>{
+      console.log(res);
+    });
   }
 }

@@ -2,13 +2,18 @@
     <div class="middle">
         <h2>Formulário</h2>
 
-        <div class="top-bar">
+        <div *ngIf="!mobile" class="top-bar">
             <span class="personal-data">Dados pessoais</span>
             <span class="ticket">Seu ingresso</span>
         </div>
 
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="right">
+                <div *ngIf="mobile" class="top-bar">Seu ingresso</div>
+                <app-ticket [moreTickets]="form.get('companion').value"></app-ticket>
+            </div>
             <div class="left">
+                <div *ngIf="mobile" class="top-bar">Dados pessoais</div>
                 <fieldset>
                     <label [ngClass]="{'error': form.get('firstName').invalid && (form.get('firstName').dirty)}">
                         <input type="text" placeholder="Primeiro Nome" formControlName="firstName" required>
@@ -121,10 +126,6 @@
                 </fieldset>
 
                 <button type="submit" [disabled]="!form.valid">Enviar</button>
-            </div>
-
-            <div class="right">
-                <app-ticket></app-ticket>
             </div>
         </form>
     </div>

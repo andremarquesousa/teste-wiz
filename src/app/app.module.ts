@@ -24,7 +24,8 @@ import { AppTicket } from './components/app.ticket';
     ReactiveFormsModule,
     NgxMaskModule.forRoot(),
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppHeader, AppFooter, AppForm, AppTicket]
 })
 export class AppModule { }
