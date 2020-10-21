@@ -65,7 +65,7 @@
                     <span>Adicionar acompanhante</span>
                 </label>
 
-                <app-address (resForm)="addressFeedback($event)"></app-address>
+                <app-address [sendValue]="send" (resForm)="addressFeedback($event)"></app-address>
 
                 <button type="submit" [disabled]="form.invalid">Enviar</button>
             </div>

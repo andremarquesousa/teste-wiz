@@ -12,7 +12,7 @@
 <div class="price">
     <div class="line">
         <span>Sub Total</span>
-        <span class="value">{{ticketValue * numberTickets | currency:'BRL'}}</span>
+        <span class="value">{{subTotal | currency:'BRL'}}</span>
     </div>
 
     <div class="line">
@@ -23,5 +23,7 @@
 
 <div class="total">
     <span>Total</span>
-    <span class="value">{{(ticketValue * numberTickets) + freight | currency:'BRL'}}</span>
+    <span class="value">{{total | currency:'BRL'}}</span>
 </div>
+
+<div>{{numberTickets | currency:'BRL'}}</div>

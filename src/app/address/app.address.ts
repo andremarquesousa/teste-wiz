@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
 
@@ -12,7 +12,8 @@ import { FormBuilder } from '@angular/forms';
 })
 
 export class AppAddress {
-  @Output() resForm = new EventEmitter<any>();
+  @Output() resForm: EventEmitter<any> = new EventEmitter();
+  @Input() sendValue: string;
 
   formGroup = this.fb.group({
     cep: [''],
@@ -46,12 +47,17 @@ export class AppAddress {
     }
   }
 
+  ngOnChanges() {
+    if(this.formGroup.valid) {
+      this.resForm.emit(this.formGroup.value);
+    }
+  }
+
   ngOnInit() {
-    this.formGroup.valueChanges.subscribe(val => {
-      if(this.formGroup.valid) {
-        console.log('oi');
-        this.resForm.emit(val);
-      }
-    })
+    // this.formGroup.valueChanges.subscribe(val => {
+    //   if(this.formGroup.valid) {
+    //     this.resForm.emit(this.formGroup.value);
+    //   }
+    // })
   }
 }

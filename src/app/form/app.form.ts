@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, SimpleChanges } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 
@@ -22,8 +22,9 @@ export class AppForm {
     companionBirthDate: [''],
     companionEmail: ['', Validators.email]
   });
-  data = {};
+  address = {};
   mobile = (window.screen.width < 960) ? true : false;
+  send = false;
 
   constructor (
     public httpClient: HttpClient,
@@ -31,21 +32,26 @@ export class AppForm {
   ){}
   
   onSubmit() {
+    this.send = true;
+    
     let headers = new HttpHeaders()
       .set('Content-Type', 'application/json')
       .set('Authorization', 'Basic #ASDFGW#ERWQERTRYT#%$%$@#$%==');
 
     const options = {headers: headers};
 
-    // console.log(this.data);
-    // console.log(this.form.value);
+    console.log({...this.form.value, ...this.address});
 
-    this.httpClient.post('http://localhost/reserva', this.form.value, options).subscribe((res)=>{
+    this.httpClient.post('http://localhost/reserva', {...this.form.value, ...this.address}, options).subscribe((res)=>{
     });
   }
 
   addressFeedback(response) {
-    console.log('teste');
-    // this.data = {...this.form.value, ...response.value};
+    console.log(response);
+    this.address = response;
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log(changes);
   }
 }

@@ -16,18 +16,25 @@ export class AppTicket {
   language = 'pt-BR';
   api = `https://api.themoviedb.org/3/movie/upcoming?api_key=${this.api_key}&page=${this.page}&language=${this.language}`;
   movie = {};
+  numberTickets = 1;
   ticketValue = 20;
   freight = 10;
-  numberTickets = 1;
+  subTotal = this.ticketValue * this.numberTickets;
+  total = this.subTotal + this.freight;
 
   constructor(private httpClient: HttpClient){}
 
   ngOnInit() {
-    this.numberTickets = this.moreTickets ? 2 : 1;
-
     this.httpClient.get(this.api).subscribe((res)=>{
       const data = res['results'][0];
       this.movie = data;
     });
+  }
+  
+  ngOnChanges() {
+    this.numberTickets = this.moreTickets ? 2 : 1;
+    this.subTotal = this.ticketValue * this.numberTickets;
+    this.total = this.subTotal + this.freight;
+    console.log('oi');
   }
 }
