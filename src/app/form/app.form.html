@@ -1,0 +1,76 @@
+<main>
+    <div class="middle">
+        <h2>Formulário</h2>
+
+        <div *ngIf="!mobile" class="top-bar">
+            <span class="personal-data">Dados pessoais</span>
+            <span class="ticket">Seu ingresso</span>
+        </div>
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="right">
+                <div *ngIf="mobile" class="top-bar">Seu ingresso</div>
+                <app-ticket [moreTickets]="form.get('companion').value"></app-ticket>
+            </div>
+            <div class="left">
+                <div *ngIf="mobile" class="top-bar">Dados pessoais</div>
+                <fieldset>
+                    <label [ngClass]="{'error': form.get('firstName').invalid && (form.get('firstName').dirty)}">
+                        <input type="text" placeholder="Primeiro Nome" formControlName="firstName" required>
+                    </label>
+        
+                    <label [ngClass]="{'error': form.get('lastName').invalid && (form.get('lastName').dirty)}">
+                        <input type="text" placeholder="Último Nome" formControlName="lastName" required>
+                    </label>
+        
+                    <label [ngClass]="{'error': form.get('cpf').invalid && (form.get('cpf').dirty)}">
+                        <input type="text" placeholder="CPF" formControlName="cpf" mask='000.000.000-00' required>
+                    </label>
+        
+                    <label [ngClass]="{'error': form.get('birthDate').invalid && (form.get('birthDate').dirty)}">
+                        <input type="text" placeholder="Data de nascimento" formControlName="birthDate" mask='00/00/0000' required>
+                    </label>
+        
+                    <label class="full" [ngClass]="{'error': form.get('email').invalid && (form.get('email').dirty)}">
+                        <input type="email" placeholder="Email" formControlName="email" required>
+                    </label>
+                </fieldset>
+
+                <fieldset *ngIf="form.get('companion').value">
+                    <p>Acompanhante</p>
+
+                    <label [ngClass]="{'error': form.get('companionFirstName').invalid && (form.get('companionFirstName').dirty)}">
+                        <input type="text" placeholder="Primeiro Nome" formControlName="companionFirstName" required>
+                    </label>
+        
+                    <label [ngClass]="{'error': form.get('companionLastName').invalid && (form.get('companionLastName').dirty)}">
+                        <input type="text" placeholder="Último Nome" formControlName="companionLastName" required>
+                    </label>
+        
+                    <label [ngClass]="{'error': form.get('companionCpf').invalid && (form.get('companionCpf').dirty)}">
+                        <input type="text" placeholder="CPF" formControlName="companionCpf" mask='000.000.000-00' required>
+                    </label>
+        
+                    <label [ngClass]="{'error': form.get('companionBirthDate').invalid && (form.get('companionBirthDate').dirty)}">
+                        <input type="text" placeholder="Data de nascimento" formControlName="companionBirthDate" mask='00/00/0000' required>
+                    </label>
+        
+                    <label class="full" [ngClass]="{'error': form.get('companionEmail').invalid && (form.get('companionEmail').dirty)}">
+                        <input type="email" placeholder="Email" formControlName="companionEmail" required>
+                    </label>
+                </fieldset>
+
+                <label class="checkbox" [ngClass]="{'checked': form.get('companion').value}">
+                    <input type="checkbox" formControlName="companion">
+                    <span>Adicionar acompanhante</span>
+                </label>
+
+                <app-address (resForm)="addressFeedback($event)"></app-address>
+
+                <button type="submit" [disabled]="form.invalid">Enviar</button>
+            </div>
+        </form>
+    </div>
+</main>
+
+<router-outlet></router-outlet>

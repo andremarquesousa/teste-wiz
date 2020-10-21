@@ -20,39 +20,16 @@ export class AppForm {
     companionLastName: [''],
     companionCpf: [''],
     companionBirthDate: [''],
-    companionEmail: ['', Validators.email],
-    cep: [''],
-    address: [''],
-    country: [''],
-    state: [''],
-    city: [''],
-    phone: ['']
+    companionEmail: ['', Validators.email]
   });
+  data = {};
   mobile = (window.screen.width < 960) ? true : false;
 
   constructor (
     public httpClient: HttpClient,
     private fb: FormBuilder
   ){}
-
-  getCEP(cep) {
-    const CEP = cep.split('.').join("").split('-').join("")
-    this.httpClient.get<any>(`https://viacep.com.br/ws/${CEP}/json`).subscribe((res)=>{
-      this.form.get('address').setValue(`${res['logradouro']} ${res['bairro']}`);
-      this.form.get('city').setValue(res['localidade']);
-      this.form.get('state').setValue(res['uf']);
-      this.form.get('country').setValue('Brasil');
-      this.form.get('phone').setValue(res['ddd']);
-      this.form.markAllAsTouched();
-    });
-  }
-
-  sendCepRequest(e){
-    if (this.form.get('cep').valid) {
-      this.getCEP(e.target.value)
-    }
-  }
-t
+  
   onSubmit() {
     let headers = new HttpHeaders()
       .set('Content-Type', 'application/json')
@@ -60,8 +37,15 @@ t
 
     const options = {headers: headers};
 
-    this.httpClient.post('http://localhost/reserva', this.form.value ,options).subscribe((res)=>{
-      console.log(res);
+    // console.log(this.data);
+    // console.log(this.form.value);
+
+    this.httpClient.post('http://localhost/reserva', this.form.value, options).subscribe((res)=>{
     });
+  }
+
+  addressFeedback(response) {
+    console.log('teste');
+    // this.data = {...this.form.value, ...response.value};
   }
 }

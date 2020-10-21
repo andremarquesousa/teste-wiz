@@ -1,0 +1,9 @@
+fieldset:first-of-type {
+    margin: 65px 0 0;
+}
+
+@media (max-width: 959px) {
+    fieldset:first-of-type {
+        margin: 60px 0 0;
+    }
+}

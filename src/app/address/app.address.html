@@ -1,0 +1,61 @@
+<fieldset [formGroup]="formGroup">
+    <p>Dados da entrega</p>
+
+    <label class="full" [ngClass]="{'error': formGroup.get('cep').invalid && (formGroup.get('cep').dirty)}">
+        <input type="text" placeholder="CEP" formControlName="cep" mask='00.000-000' (keyup)="sendCepRequest($event)" required>
+    </label>
+
+    <label class="full" [ngClass]="{'error': formGroup.get('address').invalid && (formGroup.get('address').dirty)}">
+        <input type="text" placeholder="Endereço" formControlName="address" required>
+    </label>
+
+    <label class="select" [ngClass]="{'error': formGroup.get('country').invalid && (formGroup.get('country').dirty)}">
+        <select formControlName="country" [ngClass]="{'default': !formGroup.get('country').dirty}">
+            <option value="" disabled selected>País</option>
+            <option value="Brasil">Brasil</option>
+        </select>
+    </label>
+
+    <label class="select" [ngClass]="{'error': formGroup.get('state').invalid && (formGroup.get('state').dirty)}">
+        <select formControlName="state" [ngClass]="{'default': !formGroup.get('state').dirty}">
+            <option selected="" value="" disabled>Estado</option>
+            <option value="AC">Acre</option>
+            <option value="AL">Alagoas</option>
+            <option value="AP">Amapá</option>
+            <option value="AM">Amazonas</option>
+            <option value="BA">Bahia</option>
+            <option value="CE">Ceará</option>
+            <option value="DF">Distrito Federal</option>
+            <option value="ES">Espírito Santo</option>
+            <option value="GO">Goiás</option>
+            <option value="MA">Maranhão</option>
+            <option value="MT">Mato Grosso</option>
+            <option value="MS">Mato Grosso do Sul</option>
+            <option value="MG">Minas Gerais</option>
+            <option value="PA">Pará</option>
+            <option value="PB">Paraíba</option>
+            <option value="PR">Paraná</option>
+            <option value="PE">Pernambuco</option>
+            <option value="PI">Piauí</option>
+            <option value="RJ">Rio de Janeiro</option>
+            <option value="RN">Rio Grande do Norte</option>
+            <option value="RS">Rio Grande do Sul</option>
+            <option value="RO">Rondônia</option>
+            <option value="RR">Roraima</option>
+            <option value="SC">Santa Catarina</option>
+            <option value="SP">São Paulo</option>
+            <option value="SE">Sergipe</option>
+            <option value="TO">Tocantins</option>
+        </select>
+    </label>
+
+    <label class="full" [ngClass]="{'error': formGroup.get('city').invalid && (formGroup.get('city').dirty)}">
+        <input type="text" placeholder="Cidade" formControlName="city" required>
+    </label>
+
+    <label class="full" [ngClass]="{'error': formGroup.get('phone').invalid && (formGroup.get('phone').dirty)}">
+        <input type="text" placeholder="Telefone" formControlName="phone" mask='(00) 00000-0000' required>
+    </label>
+</fieldset>
+
+<router-outlet></router-outlet>

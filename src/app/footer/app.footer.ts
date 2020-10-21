@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
 })
 
 export class AppFooter {
-  title = 'footer';
+  address = 'Stree addresses: 445 Mount, Eden Road, Mount Eden, Auckland - Postcodes: 5022'
 }
